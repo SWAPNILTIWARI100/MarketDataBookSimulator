@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Market Data Book Simulator| SWAPNIL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <span class="logo-text">Market Data Book Simulator</span>
+                <span class="logo-badge">LIVE</span>
+            </div>
+            <div class="header-stats">
+                <div class="header-stat">
+                    <span class="stat-label">Symbol Name</span>
+                    <span class="stat-value">NIL</span>
+                </div>
+                <div class="header-stat">
+                    <span class="stat-label">SecurityID</span>
+                    <span class="stat-value">****5</span>
+                </div>
+                <div class="header-stat">
+                    <span class="stat-label">Status</span>
+                    <span class="stat-value online">● ONLINE</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel - Order Entry -->
+            <div class="left-panel">
+                <div class="panel-card">
+                    <div class="panel-title">📝 ORDER ENTRY</div>
+                    <div class="order-tabs">
+                        <button class="tab-btn active" data-tab="insert">INSERT</button>
+                        <button class="tab-btn" data-tab="modify">MODIFY</button>
+                        <button class="tab-btn" data-tab="delete">DELETE</button>
+                        <button class="tab-btn" data-tab="trade">TRADE</button>
+                    </div>
+
+                    <div id="insertPanel" class="tab-panel active">
+                        <div class="input-group">
+                            <label>Order Type</label>
+                            <select id="insType" class="input-field">
+                                <option value="B">🟢 BUY (BID)</option>
+                                <option value="S">🔴 SELL (ASK)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Order ID (Auto)</label>
+                            <input type="text" id="insOrderId" class="input-field" readonly style="background:#0f172a;">
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>Price</label>
+                                <input type="number" id="insPrice" class="input-field" value="1250.50" step="0.05">
+                            </div>
+                            <div class="input-group">
+                                <label>Quantity</label>
+                                <input type="number" id="insQty" class="input-field" value="100">
+                            </div>
+                        </div>
+                        <button id="insertBtn" class="btn btn-primary">📌 INSERT ORDER</button>
+                    </div>
+
+                    <div id="modifyPanel" class="tab-panel">
+                        <div class="input-group">
+                            <label>Order Type</label>
+                            <select id="modType" class="input-field">
+                                <option value="B">🟢 BUY ORDER</option>
+                                <option value="S">🔴 SELL ORDER</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Order ID</label>
+                            <input type="text" id="modOrderId" class="input-field" placeholder="Enter Order ID">
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>New Price</label>
+                                <input type="number" id="modPrice" class="input-field" value="1260.00" step="0.05">
+                            </div>
+                            <div class="input-group">
+                                <label>New Quantity</label>
+                                <input type="number" id="modQty" class="input-field" value="80">
+                            </div>
+                        </div>
+                        <button id="modifyBtn" class="btn btn-warning">🔄 MODIFY ORDER</button>
+                    </div>
+
+                    <div id="deletePanel" class="tab-panel">
+                        <div class="input-group">
+                            <label>Order Type</label>
+                            <select id="delType" class="input-field">
+                                <option value="B">🟢 BUY ORDER</option>
+                                <option value="S">🔴 SELL ORDER</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Order ID</label>
+                            <input type="text" id="delOrderId" class="input-field" placeholder="Enter Order ID">
+                        </div>
+                        <button id="deleteBtn" class="btn btn-danger">🗑️ DELETE ORDER</button>
+                    </div>
+
+                    <div id="tradePanel" class="tab-panel">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>Buy Order ID</label>
+                                <input type="text" id="tradeBuyId" class="input-field" placeholder="Buy Order ID">
+                            </div>
+                            <div class="input-group">
+                                <label>Sell Order ID</label>
+                                <input type="text" id="tradeSellId" class="input-field" placeholder="Sell Order ID">
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>Trade Price</label>
+                                <input type="number" id="tradePrice" class="input-field" value="1255.00" step="0.05">
+                            </div>
+                            <div class="input-group">
+                                <label>Trade Quantity</label>
+                                <input type="number" id="tradeQty" class="input-field" value="50">
+                            </div>
+                        </div>
+                        <button id="tradeBtn" class="btn btn-secondary">⚡ EXECUTE TRADE</button>
+                    </div>
+                </div>
+
+                <!-- File Upload -->
+                <div class="panel-card">
+                    <div class="panel-title">📁 LOG FILE PLAYBACK</div>
+                    <div class="file-controls">
+                        <button id="uploadBtn" class="btn btn-outline">📂 CHOOSE FILE</button>
+                        <button id="playbackBtn" class="btn btn-success" disabled>▶️ RUN</button>
+                        <button id="stopPlaybackBtn" class="btn btn-danger" disabled>⏹️ STOP</button>
+                        <button id="clearLogsBtn" class="btn btn-outline">🗑️ CLEAR</button>
+                    </div>
+                    <input type="file" id="logFileInput" accept=".log,.txt" style="display:none;">
+                    <div id="fileNameDisplay" class="file-info"></div>
+                    <div id="playbackStatus" class="playback-status"></div>
+                </div>
+            </div>
+
+            <!-- Center Panel - Order Book -->
+            <div class="center-panel">
+                <div class="depth-widget">
+                    <div class="depth-header">
+                        <span>PRICE</span>
+                        <span>BID SIZE</span>
+                        <span>ASK SIZE</span>
+                        <span>TOTAL</span>
+                    </div>
+                    <div id="unifiedBookContainer" class="depth-content"></div>
+                </div>
+
+                <div class="stats-widget">
+                    <div class="stat-item">
+                        <span class="stat-label">BEST BID</span>
+                        <span class="stat-value bid" id="bestBidDisplay">0.00</span>
+                        <span class="stat-sub" id="bestBidQtyDisplay">Qty: 0</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-label">BEST ASK</span>
+                        <span class="stat-value ask" id="bestAskDisplay">0.00</span>
+                        <span class="stat-sub" id="bestAskQtyDisplay">Qty: 0</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-label">LTP</span>
+                        <span class="stat-value" id="ltpDisplay">0.00</span>
+                        <span class="stat-sub" id="ltqDisplay">Qty: 0</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-label">VOLUME</span>
+                        <span class="stat-value" id="volumeDisplay">0</span>
+                        <span class="stat-sub" id="totalOrdersCount">Orders: 0</span>
+                    </div>
+                </div>
+
+                <div class="orders-widget">
+                    <div class="orders-header">
+                        <div class="orders-title">📋 INDIVIDUAL ORDERS</div>
+                        <div class="orders-tabs">
+                            <button class="order-tab active" data-order-tab="buy">BUY ORDERS</button>
+                            <button class="order-tab" data-order-tab="sell">SELL ORDERS</button>
+                        </div>
+                    </div>
+                    <div id="buyOrdersList" class="orders-list active">— no buy orders —</div>
+                    <div id="sellOrdersList" class="orders-list">— no sell orders —</div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Charts & History -->
+            <div class="right-panel">
+                <div class="panel-card">
+                    <div class="panel-title">📈 MARKET DEPTH CHART</div>
+                    <canvas id="depthChart" width="400" height="250"></canvas>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-title">⏱️ BID/ASK PROGRESSION</div>
+                    <div class="chart-controls">
+                        <button id="clearChartBtn" class="btn-small">Clear</button>
+                    </div>
+                    <canvas id="progressionChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Panel - Event Timeline -->
+        <div class="bottom-panel">
+            <div class="timeline-header">
+                <span>📋 EVENT TIMELINE</span>
+                <div class="timeline-controls">
+                    <button id="clearTimelineBtn" class="btn-small">Clear Timeline</button>
+                    <span id="eventCount" class="event-count">0 events</span>
+                </div>
+            </div>
+            <div id="timelineContainer" class="timeline-content">
+                <div class="timeline-empty">No events yet</div>
+            </div>
+        </div>
+
+        <!-- Chart Modal for Zoom -->
+        <div id="chartModal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <h3>Market Depth Chart</h3>
+                </div>
+                <canvas id="modalDepthChart" width="800" height="500"></canvas>
+            </div>
+        </div>
+
+        <div id="progressionModal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-header">
+                    <h3>Bid/Ask Progression Chart</h3>
+                </div>
+                <canvas id="modalProgressionChart" width="800" height="500"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
