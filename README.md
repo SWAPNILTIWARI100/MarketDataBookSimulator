@@ -7,10 +7,20 @@
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
 **Real-time Market Data Book Simulator with bid/ask ledgers, order matching engine, and interactive visualizations. Simulates exchange order book behavior with automatic trade execution when orders cross.**
-
 ## 🚀 Live Demo
 
 [View Live Demo](https://swapniltiwari100.github.io/MarketDataBookSimulator/)
+
+
+### Screenshots
+
+<img width="1914" height="834" alt="image" src="https://github.com/user-attachments/assets/953fab43-9490-46a3-8c64-4296d0e2af61" />
+
+<img width="1879" height="829" alt="image" src="https://github.com/user-attachments/assets/bec029ad-0c06-419c-8458-03fb7c58fc36" />
+
+<img width="1848" height="437" alt="image" src="https://github.com/user-attachments/assets/4909f8a2-9a61-4960-b158-c86e2581dc63" />
+
+
 
 ## 📋 Table of Contents
 
@@ -20,7 +30,6 @@
 - [File Format](#file-format)
 - [Installation](#installation)
 - [Technical Details](#technical-details)
-- [Data Structures](#data-structures)
 - [Contributing](#contributing)
 
 ---
